@@ -44,7 +44,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?php if ($this->request->Session()->read('Auth.User.is_admin') === true): ?>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">View All</a></li>
+                            <li><?= $this->Html->link('View All', ['controller' => 'users', 'action' => 'index']); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
@@ -67,11 +67,11 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?php else: ?>
                     <li><a href="#">Products</a></li>
                     <li><a href="#">Suggestions</a></li>
-                    <li><a href="#">Profile</a></li>
+                    <li><?= $this->Html->link('Profile', ['controller' => 'users', 'action' => 'view', $this->request->Session()->read('Auth.User.id')]); ?></li>
                 <?php endif; ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><?php echo $this->Html->link('Log Out', ['controller' => 'users', 'action' => 'logout']) ?></li>
+                    <li class="active"><?= $this->Html->link('Log Out', ['controller' => 'users', 'action' => 'logout']); ?></li>
                 </ul>
             </div>
         </nav>
@@ -82,8 +82,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     <a class="navbar-brand" href="#">Framgia Food and Drinks</a>
                 </div>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><?php echo $this->Html->link('Log In', ['controller' => 'users', 'action' => 'login']) ?></li>
-                    <li class="active"><?php echo $this->Html->link('Sign Up', ['controller' => 'users', 'action' => 'signup']) ?></li>
+                    <li class="active"><?= $this->Html->link('Log In', ['controller' => 'users', 'action' => 'login']); ?></li>
+                    <li class="active"><?= $this->Html->link('Sign Up', ['controller' => 'users', 'action' => 'signup']); ?></li>
                 </ul>
             </div>
         </nav>
