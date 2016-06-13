@@ -72,9 +72,7 @@ class UsersTable extends Table
             ->notEmpty('email');
 
         $validator
-            ->boolean('is_admin')
-            ->requirePresence('is_admin', 'create')
-            ->notEmpty('is_admin');
+            ->boolean('is_admin');
 
         return $validator;
     }

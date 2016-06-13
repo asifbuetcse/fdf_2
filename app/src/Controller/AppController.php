@@ -37,12 +37,42 @@ class AppController extends Controller
      *
      * @return void
      */
+    public $helpers = [
+        'Html' => [
+            'className' => 'Bootstrap.BootstrapHtml'
+        ],
+        'Form' => [
+            'className' => 'Bootstrap.BootstrapForm'
+        ],
+        'Paginator' => [
+            'className' => 'Bootstrap.BootstrapPaginator'
+        ],
+        'Modal' => [
+            'className' => 'Bootstrap.BootstrapModal'
+        ]
+    ];
+
     public function initialize()
     {
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'pages',
+                'action' => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'pages',
+                'action' => 'index'
+            ]
+        ]);
+    }
+
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['index', 'view', 'display']);
     }
 
     /**
