@@ -21,34 +21,75 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->charset() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-        <?= $cakeDescription ?>:
         <?= $this->fetch('title') ?>
     </title>
-    <?= $this->Html->meta('icon') ?>
-
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
-
+    <?= $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css') ?>
+    <?= $this->Html->css('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css') ?>
+    <?= $this->Html->css('//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css') ?>
+    <?= $this->Html->script('//code.jquery.com/jquery-1.10.2.min.js') ?>
+    <?= $this->Html->script('//code.jquery.com/ui/1.10.4/jquery-ui.min.js') ?>
+    <?= $this->Html->script('http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js') ?>
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
 </head>
 <body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
-        </div>
-    </nav>
+    <?php if ($this->request->Session()->read('Auth.User')): ?>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Framgia Food and Drinks</a>
+                </div>
+                <ul class="nav navbar-nav">
+                <?php if ($this->request->Session()->read('Auth.User.is_admin') === true): ?>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Users <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">View All</a></li>
+                            <li><a href="#">Create New</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">View All</a></li>
+                            <li><a href="#">Create New</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">List Orders <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">View All</a></li>
+                        </ul>
+                    </li>
+                <?php else: ?>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Suggestions</a></li>
+                    <li><a href="#">Profile</a></li>
+                <?php endif; ?>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><?php echo $this->Html->link('Log Out', ['controller' => 'users', 'action' => 'logout']) ?></li>
+                </ul>
+            </div>
+        </nav>
+    <?php else: ?>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Framgia Food and Drinks</a>
+                </div>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><?php echo $this->Html->link('Log In', ['controller' => 'users', 'action' => 'login']) ?></li>
+                    <li class="active"><?php echo $this->Html->link('Sign Up', ['controller' => 'users', 'action' => 'signup']) ?></li>
+                </ul>
+            </div>
+        </nav>
+    <?php endif; ?>
     <?= $this->Flash->render() ?>
-    <div class="container clearfix">
+    <div class="container">
         <?= $this->fetch('content') ?>
     </div>
     <footer>

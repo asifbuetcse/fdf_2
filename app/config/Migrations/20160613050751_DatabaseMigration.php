@@ -185,7 +185,7 @@ class DatabaseMigration extends AbstractMigration
             ])
             ->addColumn('password', 'string', [
                 'default' => null,
-                'limit' => 42,
+                'limit' => 100,
                 'null' => false,
             ])
             ->addColumn('email', 'string', [
