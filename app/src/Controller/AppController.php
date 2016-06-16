@@ -59,6 +59,7 @@ class AppController extends Controller
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
             'loginRedirect' => [
                 'controller' => 'pages',
                 'action' => 'index'
@@ -70,9 +71,13 @@ class AppController extends Controller
         ]);
     }
 
-    public function beforeFilter(Event $event)
+    public function isAuthorized($user)
     {
-        $this->Auth->allow(['index', 'view', 'display']);
+        if (isset($user['is_admin']) && $user['is_admin'] === true) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
