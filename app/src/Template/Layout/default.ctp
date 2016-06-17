@@ -49,8 +49,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">View All</a></li>
-                            <li><a href="#">Create New</a></li>
+                            <li><?= $this->Html->link('View All', ['controller' => 'categories', 'action' => 'index']); ?></li>
+                            <li><?= $this->Html->link('Create New', ['controller' => 'categories', 'action' => 'add']); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Products <span class="caret"></span></a>
