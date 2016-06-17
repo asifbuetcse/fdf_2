@@ -76,15 +76,6 @@ class ProductsTable extends Table
             ->notEmpty('price');
 
         $validator
-            ->numeric('average_rating')
-            ->requirePresence('average_rating', 'create')
-            ->notEmpty('average_rating');
-
-        $validator
-            ->requirePresence('image', 'create')
-            ->notEmpty('image');
-
-        $validator
             ->integer('number')
             ->requirePresence('number', 'create')
             ->notEmpty('number');

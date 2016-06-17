@@ -221,3 +221,4 @@ Type::build('datetime')
     ->useImmutable();
 
 Plugin::load('Bootstrap') ;
+Configure::load('custom_settings');
