@@ -110,7 +110,7 @@ class DatabaseMigration extends AbstractMigration
                 'null' => false,
             ])
             ->addColumn('average_rating', 'float', [
-                'default' => null,
+                'default' => 0,
                 'limit' => null,
                 'null' => false,
             ])
