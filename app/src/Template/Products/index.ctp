@@ -1,3 +1,18 @@
+<?php if ($this->request->Session()->read('Auth.User.is_admin') === false): ?>
+    <div class="products index large-9 medium-8 columns content">
+        <?= $this->Form->create() ?>
+        <?= $this->Form->input('name') ?>
+        <?= $this->Form->input('food', ['type' => 'checkbox']); ?>
+        <?= $this->Form->input('drinks', ['type' => 'checkbox']); ?>
+        <?= $this->Form->input('lowest_price') ?>
+        <?= $this->Form->input('highest_price') ?>
+        <?= $this->Form->input('categories', ['options' => $categories, 'empty' => 'Please Select']) ?>
+        <?= $this->Form->input('lowest_average_rating') ?>
+        <?= $this->Form->input('highest_average_rating') ?>
+        <?= $this->Form->button('Submit') ?>
+        <?= $this->Form->end() ?>
+    </div>
+<?php endif; ?>
 <div class="products index large-9 medium-8 columns content">
     <h3><?= __('Products') ?></h3>
     <table class="table tbale-bordered" cellpadding="0" cellspacing="0">
@@ -31,8 +46,10 @@
                 <td><?= $this->Number->format($product->number) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $product->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]) ?>
+                    <?php if ($this->request->Session()->read('Auth.User.is_admin') === true): ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $product->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $product->id], ['confirm' => __('Are you sure you want to delete # {0}?', $product->id)]) ?>
+                    <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

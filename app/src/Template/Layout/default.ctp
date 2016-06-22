@@ -65,7 +65,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a href="#">Products</a></li>
+                    <li><?= $this->Html->link('Products', ['controller' => 'products', 'action' => 'index']); ?></li>
                     <li><a href="#">Suggestions</a></li>
                     <li><?= $this->Html->link('Profile', ['controller' => 'users', 'action' => 'view', $this->request->Session()->read('Auth.User.id')]); ?></li>
                 <?php endif; ?>

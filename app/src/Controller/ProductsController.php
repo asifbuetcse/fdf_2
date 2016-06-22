@@ -2,19 +2,57 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 class ProductsController extends AppController
 {
     var $components = ['FileUpload'];
+
+    public function isAuthorized($user)
+    {
+        if (in_array($this->request->action, ['index', 'view'])) {
+            return true;
+        }
+        return parent::isAuthorized($user);
+    }
+
     public function index()
     {
         $this->paginate = [
             'contain' => ['Categories']
         ];
         $products = $this->paginate($this->Products);
+        $this->loadModel('Categories');
+        $categories = $this->Categories->find('list', [
+            'keyField' => 'id',
+            'valueField' => 'name'
+        ]);
+        if ($this->request->is('post')) {
+            $products = TableRegistry::get('Products');
+            $query = $products->find();
+            $query->where(['Products.name LIKE' => '%' . $this->request->data['name'] . '%']);
+            $query->where(['Products.is_food IN' => [$this->request->data['food'], !$this->request->data['drinks']]]);
+            if ($this->request->data['lowest_price']) {
+                $query->where(['Products.price >= ' => $this->request->data['lowest_price']]);
+            }
+            if ($this->request->data['highest_price']) {
+                $query->where(['Products.price <= ' => $this->request->data['highest_price']]);
+            }
+            if ($this->request->data['lowest_average_rating']) {
+                $query->where(['Products.average_rating >= ' => $this->request->data['lowest_average_rating']]);
+            }
+            if ($this->request->data['highest_average_rating']) {
+                $query->where(['Products.average_rating <= ' => $this->request->data['highest_average_rating']]);
+            }
+            if ($this->request->data['categories']) {
+                $query->where(['Products.category_id' => $this->request->data['categories']]);
+            }
+            $products = $this->paginate($query);
+        }
 
         $this->set(compact('products'));
-        $this->set('_serialize', ['products']);
+        $this->set(compact('categories'));
+        $this->set('_serialize', ['products', 'categories']);
     }
 
     public function view($id = null)
