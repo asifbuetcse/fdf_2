@@ -34,6 +34,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 </head>
 <body>
+    <?= $this->Facebook->initJsSDK(); ?>
     <?php if ($this->request->Session()->read('Auth.User')): ?>
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
