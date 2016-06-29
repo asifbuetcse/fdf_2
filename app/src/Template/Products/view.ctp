@@ -45,21 +45,13 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('User Id') ?></th>
-                <th><?= __('Product Id') ?></th>
                 <th><?= __('Body') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($product->comments as $comments): ?>
             <tr>
                 <td><?= h($comments->id) ?></td>
                 <td><?= h($comments->user_id) ?></td>
-                <td><?= h($comments->product_id) ?></td>
                 <td><?= h($comments->body) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Comments', 'action' => 'view', $comments->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Comments', 'action' => 'edit', $comments->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Comments', 'action' => 'delete', $comments->id], ['confirm' => __('Are you sure you want to delete # {0}?', $comments->id)]) ?>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>
@@ -72,24 +64,35 @@
             <tr>
                 <th><?= __('Id') ?></th>
                 <th><?= __('User Id') ?></th>
-                <th><?= __('Product Id') ?></th>
                 <th><?= __('Value') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
             </tr>
             <?php foreach ($product->ratings as $ratings): ?>
             <tr>
                 <td><?= h($ratings->id) ?></td>
                 <td><?= h($ratings->user_id) ?></td>
-                <td><?= h($ratings->product_id) ?></td>
                 <td><?= h($ratings->value) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Ratings', 'action' => 'view', $ratings->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Ratings', 'action' => 'edit', $ratings->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Ratings', 'action' => 'delete', $ratings->id], ['confirm' => __('Are you sure you want to delete # {0}?', $ratings->id)]) ?>
-                </td>
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
+    </div>
+    <div class="btn-group col-sm-12">
+        <?= $this->Html->link('Add A Comment', [
+            'controller' => 'Comments',
+            'action' => 'add',
+            $product->id,
+        ], [
+            'class' => 'btn btn-primary btn-lg col-sm-5',
+            'role' => 'button'
+        ]); ?>
+        <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2"></div>
+        <?= $this->Html->link('Give Rating', [
+            'controller' => 'Ratings',
+            'action' => 'add',
+            $product->id,
+        ], [
+            'class' => 'btn btn-primary btn-lg col-sm-5',
+            'role' => 'button'
+        ]); ?>
     </div>
 </div>
