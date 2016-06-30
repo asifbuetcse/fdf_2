@@ -222,3 +222,4 @@ Type::build('datetime')
 
 Plugin::load('Bootstrap') ;
 Configure::load('custom_settings');
+Plugin::load('AkkaFacebook', ['bootstrap' => false, 'routes' => true]);

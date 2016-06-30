@@ -340,4 +340,11 @@ return [
     'Session' => [
         'defaults' => 'php',
     ],
+
+    'facebookConfiguration' => [
+        'appId' => 'app_id',
+        'appSecret' => 'secret',
+        'appScope' => 'app_score',
+        'redirectUrl' => 'redirect_url',
+    ]
 ];

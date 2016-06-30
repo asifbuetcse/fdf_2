@@ -16,6 +16,7 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Core\Configure;
 
 /**
  * Application Controller
@@ -68,6 +69,17 @@ class AppController extends Controller
                 'controller' => 'pages',
                 'action' => 'index'
             ]
+        ]);
+
+        $this->loadComponent('AkkaFacebook.Graph', [
+            'app_id' => Configure::read('facebookConfiguration.appId'),
+            'app_secret' => Configure::read('facebookConfiguration.appSecret'),
+            'app_scope' => Configure::read('facebookConfiguration.appScope'),
+            'redirect_url' => Configure::read('facebookConfiguration.redirectUrl'),
+            'post_login_redirect' => [
+                'controller' => 'pages',
+                'action' => 'index'
+            ],
         ]);
     }
 
