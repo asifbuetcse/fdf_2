@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 use Cake\ORM\TableRegistry;
+use Cake\Datasource\ConnectionManager;
 
 class ProductsController extends AppController
 {
@@ -10,9 +11,10 @@ class ProductsController extends AppController
 
     public function isAuthorized($user)
     {
-        if (in_array($this->request->action, ['index', 'view'])) {
+        if (in_array($this->request->action, ['index', 'view', 'addToCart'])) {
             return true;
         }
+
         return parent::isAuthorized($user);
     }
 
@@ -123,5 +125,40 @@ class ProductsController extends AppController
             $this->Flash->error(__('The product could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function addToCart($id)
+    {
+        $connection = ConnectionManager::get('default');
+        $userCarts = $this->Products->Carts->find()->where([
+            'user_id' => $this->Auth->user('id'),
+            'is_ordered' => 0,
+        ])->first();
+        if ($userCarts) {
+            $cartId = $userCarts->id;
+        } else {
+            $cartId = $connection->insert('carts', [
+                'user_id' => $this->Auth->user('id'),
+                'is_ordered' => 0,
+                'payment_method' => 0
+            ])->lastInsertId('carts');
+        }
+
+        $alreadyOrdered = $this->Products->CartsProducts->find()->where([
+            'cart_id' => $cartId,
+            'product_id' => $id,
+        ])->first();
+        if (!$alreadyOrdered) {
+            $connection->insert('carts_products', [
+                'cart_id' => $cartId,
+                'product_id' => $id,
+                'quantity' => 1,
+            ]);
+        } else {
+            $connection->update('carts_products', ['quantity' => $alreadyOrdered->quantity + 1] , ['id' => $alreadyOrdered->id]);
+        }
+        $this->Flash->success(__('The product has been Added to cart.'));
+
+        return $this->redirect(['controller' => 'products', 'action' => 'index']);
     }
 }
