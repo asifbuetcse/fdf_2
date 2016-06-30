@@ -65,9 +65,18 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                             <li><a href="#">View All</a></li>
                         </ul>
                     </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Suggestions
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><?= $this->Html->link('View All', ['controller' => 'suggestions', 'action' => 'index']); ?></li>
+                        </ul>
+                    </li>
                 <?php else: ?>
                     <li><?= $this->Html->link('Products', ['controller' => 'products', 'action' => 'index']); ?></li>
-                    <li><a href="#">Suggestions</a></li>
+                    <li><?= $this->Html->link('Add a Suggestion', ['controller' => 'suggestions', 'action' => 'add']); ?></li>
                     <li><?= $this->Html->link('Profile', ['controller' => 'users', 'action' => 'view', $this->request->Session()->read('Auth.User.id')]); ?></li>
                 <?php endif; ?>
                 </ul>
