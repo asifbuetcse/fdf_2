@@ -60,9 +60,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                             <li><?= $this->Html->link('Create New', ['controller' => 'products', 'action' => 'add']); ?></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">List Orders <span class="caret"></span></a>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">List Orders <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="#">View All</a></li>
+                            <li><?= $this->Html->link('View All', ['controller' => 'carts', 'action' => 'index']); ?></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -77,7 +78,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
                 <?php else: ?>
                     <li><?= $this->Html->link('Products', ['controller' => 'products', 'action' => 'index']); ?></li>
                     <li><?= $this->Html->link('Add a Suggestion', ['controller' => 'suggestions', 'action' => 'add']); ?></li>
-                    <li><?= $this->Html->link('Profile', ['controller' => 'users', 'action' => 'view', $this->request->Session()->read('Auth.User.id')]); ?></li>
+                    <li><?= $this->Html->link('Profile', [
+                            'controller' => 'users',
+                            'action' => 'view',
+                            $this->request->Session()->read('Auth.User.id')
+                        ]); ?>
+                    </li>
+                    <li><?= $this->Html->link('Carts', ['controller' => 'carts', 'action' => 'index']); ?></li>
                 <?php endif; ?>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">

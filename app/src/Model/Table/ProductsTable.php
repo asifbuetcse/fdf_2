@@ -39,6 +39,9 @@ class ProductsTable extends Table
         $this->hasMany('Comments', [
             'foreignKey' => 'product_id'
         ]);
+        $this->hasMany('CartsProducts', [
+            'foreignKey' => 'product_id'
+        ]);
         $this->hasMany('Ratings', [
             'foreignKey' => 'product_id'
         ]);

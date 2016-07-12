@@ -40,6 +40,11 @@ class DatabaseMigration extends AbstractMigration
                 'limit' => 11,
                 'null' => false,
             ])
+            ->addColumn('quantity', 'integer', [
+                'default' => 0,
+                'limit' => 11,
+                'null' => false,
+            ])
             ->addIndex(
                 [
                     'cart_id',

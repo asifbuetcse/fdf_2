@@ -95,4 +95,17 @@
             'role' => 'button'
         ]); ?>
     </div>
+    <?php if ($this->request->Session()->read('Auth.User.is_admin') === false): ?>
+        <div class="btn-group col-sm-12">
+            <?= $this->Html->link('Add to Cart', [
+                'controller' => 'Products',
+                'action' => 'addToCart',
+                $product->id,
+            ],
+            [
+                'class' => 'btn btn-primary btn-lg col-sm-5',
+                'role' => 'button'
+            ]); ?>
+        </div>
+    <?php endif; ?>
 </div>
