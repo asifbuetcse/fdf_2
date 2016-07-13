@@ -45,7 +45,7 @@
             <tr>
                 <td><?= h($products->id) ?></td>
                 <td><?= h($products->name) ?></td>
-                <td><?= h($products->is_food) ?></td>
+                <td><?= $products->is_food ? __('Food') : __('Drinks'); ?></td>
                 <td><?= h($products->price) ?></td>
                 <td><?= h($products->category_id) ?></td>
                 <td><?= h($products->average_rating) ?></td>

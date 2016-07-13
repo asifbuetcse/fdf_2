@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <th><?= __('Is Admin') ?></th>
-            <td><?= $this->Number->format($user->is_admin) ?></td>
+            <td><?= $user->is_admin ? __('Admin') : __('Member'); ?></td>
         </tr>
     </table>
     <p><?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?></p>

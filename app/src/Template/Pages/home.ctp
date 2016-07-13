@@ -22,13 +22,12 @@ $this->extend('/Layout/default');
         <p><?= __('Welcome to Framgia Food and Drinks') ?></p>
     </div>
     <?php if (!$this->request->Session()->read('Auth.User')): ?>
-        <div class="col-sm-12">
-            <?= $this->Facebook->loginLink(['class' => 'btn btn-primary btn-lg col-sm-5', 'role' => 'button']); ?>
-        </div>
         <div class="btn-group col-sm-12">
-            <?= $this->Html->link('Sign Up',['controller' => 'Users', 'action' => 'signup'],['class' => 'btn btn-primary btn-lg col-sm-5', 'role' => 'button']); ?>
-            <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2"></div>
-            <?= $this->Html->link('Login',['controller' => 'Users', 'action' => 'login'],['class' => 'btn btn-primary btn-lg col-sm-5', 'role' => 'button']); ?>
+            <?= $this->Facebook->loginLink(['class' => 'btn btn-primary btn-lg col-sm-4', 'role' => 'button']); ?>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+            <?= $this->Html->link('Sign Up',['controller' => 'Users', 'action' => 'signup'],['class' => 'btn btn-primary btn-lg col-sm-3', 'role' => 'button']); ?>
+            <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+            <?= $this->Html->link('Login',['controller' => 'Users', 'action' => 'login'],['class' => 'btn btn-primary btn-lg col-sm-3', 'role' => 'button']); ?>
         </div>
     <?php endif; ?>
 </div>

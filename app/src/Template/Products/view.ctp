@@ -34,8 +34,8 @@
             <td><?= $this->Number->format($product->number) ?></td>
         </tr>
         <tr>
-            <th><?= __('Is Food') ?></th>
-            <td><?= $product->is_food ? __('Yes') : __('No'); ?></td>
+            <th><?= __('Food / Drinks') ?></th>
+            <td><?= $product->is_food ? __('Food') : __('Drinks'); ?></td>
         </tr>
     </table>
     <div class="related">
@@ -82,30 +82,29 @@
             'action' => 'add',
             $product->id,
         ], [
-            'class' => 'btn btn-primary btn-lg col-sm-5',
+            'class' => 'btn btn-primary btn-lg col-sm-3',
             'role' => 'button'
         ]); ?>
-        <div class="col-sm-2 col-xs-2 col-md-2 col-lg-2"></div>
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
         <?= $this->Html->link('Give Rating', [
             'controller' => 'Ratings',
             'action' => 'add',
             $product->id,
         ], [
-            'class' => 'btn btn-primary btn-lg col-sm-5',
+            'class' => 'btn btn-primary btn-lg col-sm-3',
             'role' => 'button'
         ]); ?>
-    </div>
-    <?php if ($this->request->Session()->read('Auth.User.is_admin') === false): ?>
-        <div class="btn-group col-sm-12">
+        <div class="col-sm-1 col-xs-1 col-md-1 col-lg-1"></div>
+        <?php if ($this->request->Session()->read('Auth.User.is_admin') === false): ?>
             <?= $this->Html->link('Add to Cart', [
                 'controller' => 'Products',
                 'action' => 'addToCart',
                 $product->id,
             ],
             [
-                'class' => 'btn btn-primary btn-lg col-sm-5',
+                'class' => 'btn btn-primary btn-lg col-sm-3',
                 'role' => 'button'
             ]); ?>
-        </div>
-    <?php endif; ?>
+        <?php endif; ?>
+    </div>
 </div>

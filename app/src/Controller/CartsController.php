@@ -9,7 +9,7 @@ class CartsController extends AppController
 {
     public function isAuthorized($user)
     {
-        if (in_array($this->request->action, ['index', 'view', 'orderNow', 'remove'])) {
+        if (in_array($this->request->action, ['index', 'view', 'orderNow', 'removeProduct'])) {
             return true;
         }
 
